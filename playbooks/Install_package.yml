@@ -1,0 +1,14 @@
+---
+
+- hosts: playbooks
+  gather_facts: false
+  user: ubuntu
+  become: yes
+  become_user: root
+  becomd_method: sudo
+ 
+  tasks:
+  - name: Install Python
+    raw: test -e /usr/bin/python || (apt-get updates && apt-get install -y python)
+	
+	
