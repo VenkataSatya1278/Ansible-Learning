@@ -1,0 +1,24 @@
+---
+
+#Webserver
+
+- name: SYSTEM | Install Utils Package
+  package: name={{ Item }} state=present
+  with_items:
+    - python-apt
+    
+- name: NGINX | Ensure that nginx PPA is added to Ubuntu
+  apt_repository: repo='ppa:nginx/stable' update_cache=yes
+  
+- name: NGINX | Install nginx package
+  package: name= nginx state=present
+  
+- name: NGINX | removing default vhost
+  file: path=/etc/nginx/sites-enabled/defaults state=absent
+  
+- name: NGINX | configure mattermost vhost
+  template: src=mattermostt.conf dst=/etc/nginx/conf.d/mattermost.conf
+  
+#Application Install
+
+- 

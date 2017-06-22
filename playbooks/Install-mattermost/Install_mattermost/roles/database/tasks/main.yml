@@ -1,0 +1,47 @@
+---
+- name: SYSTEM | Install the basic database packages
+  packages: name={{ item }} state=present
+  with_items:
+     - postgresql
+     - postgresql-contrib
+     - python-psycopg2
+     
+- name: POSTGRES | Create mattermost database
+  become: true
+  become_user : prostgres
+  postgresql_db:
+    name: mattermost
+    
+- name: POSTGRES | Create mattermost dbuser
+  become: yes
+  become_user: postgres
+  postgresql_user:
+    db: mattermost
+    name: "{{ dbuser }}"
+    password: "{{ db_password }}"
+    priv: ALL
+    
+- name: POSTGRES | Shore up the DB Previlidges for our applicatin user
+  become: yes
+  become_user: postgres
+  postgresql_user:
+    name: "{{ db_user }}"
+    role_attr_glags: NOSUPERUSER, NOCREATEDB
+    
+- Block:
+  - name: POSTGRES | Set up pg_hba.conf allow connections from Webservers
+    template: src = pg_hba.conf dest={{ PG_HBA_CONF }}
+    notify:
+      - restart postgres
+      
+  - name: POSTGRES | Listen on all IPs
+    lineinfile:
+      dest: "{{ PG_CONG }}
+      line: listen_addresses='*'
+    notify:
+      - restart postgres
+   when: hostvars[groups['webservers'][0]['inventory_hostname'] ! = inventory_hostname
+      
+      
+      
+      
