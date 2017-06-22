@@ -1,0 +1,11 @@
+---
+
+- name: SYSTEM | check uptime
+  hosts: all
+  gather_facts: False
+  tasks:
+     - shell: /usr/bin/uptime
+       register: myuptime
+
+     - name: uptime debugging
+       debug: var=myuptime
