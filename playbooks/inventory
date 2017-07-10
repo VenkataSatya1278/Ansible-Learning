@@ -1,0 +1,14 @@
+[All:children]
+webservers
+dbservers
+
+
+[webservers]
+webserver ansible_host=10.0.3.167
+
+[dbservers]
+dbserver ansible_host=10.0.3.202
+
+[datacenter]
+
+
