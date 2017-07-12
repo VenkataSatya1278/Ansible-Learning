@@ -1,0 +1,59 @@
+---
+- hosts: webservers
+  gather_facts: False
+  tasks:
+  - name: SYSTEM | Install the basic web package
+    apt: pkg={{ item }} state=present
+    with_items:
+    - nginx
+    register: myoutput
+
+  - name: state Debugging
+    debug: var=myoutput.stdout_lines
+
+
+
+  # tasks: 
+  #  - name: SYSTEM | Check nginx packages Status
+  #    become: yes
+  #    shell: service nginx status
+  #    register: myoutput
+
+  #  - name: State Debugging
+  #    debug: var=myoutput.stdout_lines
+
+
+
+  # tasks:
+  # - name: SYSTEM | Change the state of web package
+  #   service: name={{ item }} state=started
+  #   with_items:
+  #    - nginx
+  #   register: myoutput
+
+  # - name: state Debugging
+  #   debug: var=myoutput.results
+
+
+
+  # tasks:
+  # - name: SYSTEM | Change the state of web package
+  #   service: name={{ item }} state=stopped
+  #   with_items:
+  #    - nginx
+  #   register: myoutput
+
+  # - name: state Debugging
+  #   debug: var=myoutput.results
+
+
+  
+
+  # tasks: 
+  #  - name: SYSTEM | Autoremove web packages
+  #    become: yes
+  #    shell: apt -y autoremove nginx
+  #    register: myoutput
+
+  #  - name: state Debugging
+  #    debug: var=myoutput.stdout_lines
