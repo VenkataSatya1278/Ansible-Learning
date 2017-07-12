@@ -1,7 +1,7 @@
 ---
 
 - name: SYSTEM | check uptime
-  hosts: all
+  hosts: webservers
   gather_facts: False
   tasks:
      - shell: /usr/bin/uptime
@@ -10,11 +10,11 @@
      - name: Uptime Debugging
        debug: var=myuptime
 
-     - name: Uptime, Verbosity 1
-       debug: var=myuptime verbosity=1
+     #- name: Uptime, Verbosity 1
+     #  debug: var=myuptime verbosity=1
 
-     - name: Uptime, Verbosity 2
-       debug: var=myuptime verbosity=2
+     #- name: Uptime, Verbosity 2
+     #  debug: var=myuptime verbosity=2
 
-     - name: Uptime, Verbosity 3
-       debug: var=myuptime verbosity=3
+     #- name: Uptime, Verbosity 3
+     #  debug: var=myuptime verbosity=3

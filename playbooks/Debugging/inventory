@@ -1,1 +1,17 @@
-10.0.3.134
+[allservers]
+webserver ansible_ssh_host=10.0.3.167
+dbserver ansible_ssh_host=10.0.3.202
+
+[webservers]
+webserver
+
+[dbservers]
+dbserver
+
+[datacenter:children]
+webservers
+dbservers
+
+[datacenter:vars]
+ansible_ssh_user=ubuntu
+ansible_ssh_pass=ubuntu

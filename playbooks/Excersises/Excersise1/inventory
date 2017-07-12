@@ -1,0 +1,13 @@
+[Allrouters]
+Router1 ansible_ssh_host=192.168.0.110 
+Router2 ansible_ssh_host=192.168.0.102
+
+
+[cisco_routers]
+Router1
+Router2
+
+[cisco_routers:vars]
+ansible_ssh_user=cisco
+ansible_ssh_pass=cisco
+ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
