@@ -1,0 +1,113 @@
+---
+- hosts: webservers
+  gather_facts: False
+  sudo: yes
+
+  tasks:
+  - name: SYSTEM | Install the basic web package
+    apt: pkg={{ item }} state=present
+    with_items:
+    - nginx
+    register: myoutput
+
+  - name: state Debugging
+    debug: var=myoutput.stdout_lines
+
+  # - name: SYSTEM | Check nginx packages Status
+  #   become: yes
+  #   shell: service nginx status
+  #   register: myoutput
+
+  # - name: State Debugging
+  #   debug: var=myoutput.stdout_lines
+
+  # - name: SYSTEM | Change the state of web package
+  #   service: name={{ item }} enabled=yes state=started
+  #   with_items:
+  #    - nginx
+  #   register: myoutput
+
+  # - name: state Debugging
+  #   debug: var=myoutput.results
+
+  # - name: SYSTEM | Change the state of web package
+  #   service: name={{ item }} state=stopped
+  #   with_items:
+  #    - nginx
+  #   register: myoutput
+
+  # - name: state Debugging
+  #   debug: var=myoutput.results
+ 
+  # - name: SYSTEM | Autoremove web packages
+  #   become: yes
+  #   shell: apt -y autoremove nginx
+  #   register: myoutput
+
+  # - name: state Debugging
+  #   debug: var=myoutput.stdout_lines
+
+
+- hosts: dbservers
+  gather_facts: False
+  sudo: yes
+
+  tasks:
+  - name: SYSTEM | Install the Database
+    apt: name={{ item }} state=present
+    with_items:
+    - mysql-server
+    register: myoutput
+
+  - name: state Debugging
+    debug: var=myoutput
+
+  #  - name: SYSTEM | Check database Status
+  #    become: yes
+  #    shell: service mysql status
+  #    register: myoutput
+
+  #  - name: State Debugging
+  #    debug: var=myoutput
+
+  # - name: SYSTEM | Change the state of db package
+  #   service: name={{ item }} enabled=yes state=started
+  #   with_items:
+  #    - mysql
+  #   register: myoutput
+
+  # - name: state Debugging
+  #   debug: var=myoutput.results
+
+  # - name: SYSTEM | Change the state of Database
+  #   service: name={{ item }} state=stopped
+  #   with_items:
+  #    - mysql
+  #   register: myoutput
+
+  # - name: state Debugging
+  #   debug: var=myoutput.results
+
+  # - name: SYSTEM | Autoremove db packages
+  #   become: yes
+  #   shell: apt -y autoremove mysql
+  #   register: myoutput
+
+  # - name: state Debugging
+  #   debug: var=myoutput.results
+
+
+
+- hosts: webservers:dbservers
+  gather_facts: False
+  sudo: yes
+
+  tasks:
+  - name: SYSTEM | Install the Database
+    service: name={{ item }} state=stopped
+    with_items:
+    - iptables
+    register: myoutput
+
+  - name: state Debugging
+    debug: var=myoutput

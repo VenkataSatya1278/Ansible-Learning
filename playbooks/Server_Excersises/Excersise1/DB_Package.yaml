@@ -1,0 +1,60 @@
+- hosts: dbservers
+  gather_facts: False
+  sudo: yes
+
+  # tasks:
+  # - name: SYSTEM | Install the Database
+  #   apt: name={{ item }} state=present
+  #   with_items:
+  #   - mysql-server
+  #   register: myoutput
+
+  # - name: state Debugging
+  #   debug: var=myoutput
+
+
+
+  # tasks: 
+  #  - name: SYSTEM | Check database Status
+  #    become: yes
+  #    shell: service mysql status
+  #    register: myoutput
+
+  #  - name: State Debugging
+  #    debug: var=myoutput
+
+
+
+  tasks:
+  - name: SYSTEM | Change the state of db package
+    service: name={{ item }} state=started
+    with_items:
+     - mysql
+    register: myoutput
+
+  - name: state Debugging
+    debug: var=myoutput.results
+
+
+
+  # tasks:
+  # - name: SYSTEM | Change the state of Database
+  #   service: name={{ item }} state=stopped
+  #   with_items:
+  #    - mysql
+  #   register: myoutput
+
+  # - name: state Debugging
+  #   debug: var=myoutput.results
+
+
+  
+
+  # tasks: 
+  #  - name: SYSTEM | Autoremove db packages
+  #    become: yes
+  #    shell: apt -y autoremove mysql
+  #    register: myoutput
+
+  #  - name: state Debugging
+  #    debug: var=myoutput.results

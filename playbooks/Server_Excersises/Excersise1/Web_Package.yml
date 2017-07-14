@@ -1,6 +1,8 @@
 ---
 - hosts: webservers
   gather_facts: False
+  sudo: yes
+
   tasks:
   - name: SYSTEM | Install the basic web package
     apt: pkg={{ item }} state=present

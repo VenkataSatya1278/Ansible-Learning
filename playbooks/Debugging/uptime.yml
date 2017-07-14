@@ -3,6 +3,7 @@
 - name: SYSTEM | check uptime
   hosts: webservers
   gather_facts: False
+  #sudo: yes
   tasks:
      - shell: /usr/bin/uptime
        register: myuptime
