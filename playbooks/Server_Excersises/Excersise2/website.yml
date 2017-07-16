@@ -2,14 +2,15 @@
 
 - hosts: webservers
   
-  vars:
-    - MyMessage: "Welcome to Ansible World!!"
-
+  # vars:
+  #   - MyMessage: "Welcome to Ansible World!!"
+  vars_files:
+    - 'vars.yml'
 
   tasks:
-    - name: Install NGINX package
-      apt: pkg=nginx state=installed update_cache=true
-      when: ansible_os_family=="Debian"
+    # - name: Install NGINX package
+    #   apt: pkg=nginx state=installed update_cache=true
+    #   when: ansible_os_family=="Debian"
 
     - name: Start NGINX service
       service: name=nginx enabled=yes state=started 
@@ -21,11 +22,11 @@
     # - name: check the result
     #   debug: var=result
 
-    - name: Copy Site files
-      template: src=templates/index.html.j2 dest=/var/www/html/index.nginx-debian.html
-      #when: result.stat.exists
-      notify: Restart NGINX
+  #   - name: Copy Site files
+  #     template: src=templates/index.html.j2 dest=/var/www/html/index.nginx-debian.html
+  #     #when: result.stat.exists
+  #     notify: Restart NGINX
 
-  handlers:
-    - name: Restart NGINX
-      service: name=nginx state=restarted
+  # handlers:
+  #   - name: Restart NGINX
+  #     service: name=nginx state=restarted
