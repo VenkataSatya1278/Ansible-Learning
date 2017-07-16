@@ -13,5 +13,5 @@ webservers
 dbservers
 
 [datacenter:vars]
-ansible_ssh_user=root
-ansible_ssh_pass=s@ir@m
+ansible_ssh_user=ubuntu
+ansible_ssh_pass=ubuntu
