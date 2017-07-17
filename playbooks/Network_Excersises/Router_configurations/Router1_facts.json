@@ -1,0 +1,55 @@
+{
+    "ansible_facts": {
+        "ansible_net_all_ipv4_addresses": [
+            "192.168.0.110"
+        ], 
+        "ansible_net_all_ipv6_addresses": [], 
+        "ansible_net_config": "Building configuration...\n\nCurrent configuration : 1101 bytes\n!\nversion 12.4\nservice timestamps debug datetime msec\nservice timestamps log datetime msec\nservice password-encryption\n!\nhostname Router1\n!\nboot-start-marker\nboot-end-marker\n!\nenable secret 5 $1$r6cp$Ur7jiZM44abeUyFCsB.S7.\n!\nno aaa new-model\nmemory-size iomem 5\nno ip icmp rate-limit unreachable\nip cef\n!\n!\n!\n!\nno ip domain lookup\nip domain name myrouter.com\nip auth-proxy max-nodata-conns 3\nip admission max-nodata-conns 3\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\nusername cisco privilege 15 password 7 094F471A1A0A\n!\n!\nip tcp synwait-time 5\n! \n!\n!\n!\n!\ninterface FastEthernet0/0\n description \"connected to switch\"\n ip address 192.168.0.110 255.255.255.0\n duplex auto\n speed auto\n!\ninterface FastEthernet0/1\n no ip address\n shutdown\n duplex auto\n speed auto\n!\n!\nip forward-protocol nd\n!\n!\nno ip http server\nno ip http secure-server\n!\n!\n!\n!\ncontrol-plane\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\nline con 0\n exec-timeout 0 0\n privilege level 15\n logging synchronous\n login local\nline aux 0\n exec-timeout 0 0\n privilege level 15\n logging synchronous\nline vty 0 4\n password 7 104D000A0618\n login local\n transport input ssh\n!\n!\nend", 
+        "ansible_net_filesystems": [
+            "flash:"
+        ], 
+        "ansible_net_gather_subset": [
+            "hardware", 
+            "default", 
+            "interfaces", 
+            "config"
+        ], 
+        "ansible_net_hostname": "Router1", 
+        "ansible_net_image": "tftp://255.255.255.255/unknown", 
+        "ansible_net_interfaces": {
+            "FastEthernet0/0": {
+                "bandwidth": 10000, 
+                "description": "\"connected to switch\"", 
+                "duplex": null, 
+                "ipv4": {
+                    "address": "192.168.0.110", 
+                    "masklen": 24
+                }, 
+                "lineprotocol": "up ", 
+                "macaddress": "c400.3648.0000", 
+                "mediatype": null, 
+                "mtu": 1500, 
+                "operstatus": "up", 
+                "type": "Gt96k FE"
+            }, 
+            "FastEthernet0/1": {
+                "bandwidth": 10000, 
+                "description": null, 
+                "duplex": null, 
+                "ipv4": null, 
+                "lineprotocol": "down ", 
+                "macaddress": "c400.3648.0001", 
+                "mediatype": null, 
+                "mtu": 1500, 
+                "operstatus": "administratively down", 
+                "type": "Gt96k FE"
+            }
+        }, 
+        "ansible_net_memfree_mb": 27176, 
+        "ansible_net_memtotal_mb": 42532, 
+        "ansible_net_model": "3745 (R7000) processor", 
+        "ansible_net_serialnum": "FTX0945W0MY", 
+        "ansible_net_version": "12.4(25d)"
+    }, 
+    "changed": false
+}

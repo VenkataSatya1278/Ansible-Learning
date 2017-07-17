@@ -1,0 +1,38 @@
+---
+- hosts: cisco_routers
+  #gather_facts: False
+
+  vars_files:
+    - 'vars.yml'
+  
+  tasks:
+   - name: Backup Device configuration
+     ios_command: 
+       commands: show run
+     register: config_backup
+
+   # - name: Print the output
+   #   debug: 
+   #     msg: "{{config_backup.stdout[0]}}"
+   
+   - name: Save Device Configuration to a file in a location
+     copy: 
+       content: "{{config_backup.stdout[0]}}"
+       dest: "~/Ansible-Learning/playbooks/Network_Excersises/Router_configurations/{{inventory_hostname}}.txt"
+   
+  #tasks:  
+   - name: IOS_facts Collection
+     register: facts
+     ios_facts: 
+       gather_subset: all       
+       
+
+   # - name: Print the output
+   #   debug: 
+   #     msg: "{{facts}}"
+
+   - name: Save IOS_facts to a file in a location
+     copy: 
+       content: "{{facts | to_nice_json}}"
+       dest: "~/Ansible-Learning/playbooks/Network_Excersises/Router_configurations/{{inventory_hostname}}_facts.json"
+     

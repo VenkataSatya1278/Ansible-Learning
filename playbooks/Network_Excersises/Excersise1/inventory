@@ -9,5 +9,6 @@ Router2
 
 [cisco_routers:vars]
 ansible_ssh_user=cisco
-ansible_ssh_pass=cisco
+ansible_ssh_pass={{password}}
 ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
+ansible_connection=local
