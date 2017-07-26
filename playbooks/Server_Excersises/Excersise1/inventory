@@ -14,4 +14,4 @@ dbservers
 
 [datacenter:vars]
 ansible_ssh_user=ubuntu
-ansible_ssh_pass=ubuntu
+#ansible_ssh_pass=ubuntu
