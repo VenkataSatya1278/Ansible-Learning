@@ -1,0 +1,13 @@
+---
+- hosts: allservers
+  gather_facts: False
+  
+  vars_files:
+    - 'vars.yml'
+
+  tasks:   
+  - name: Update & Upgrade package
+    shell: apt -y update || apt -y upgrade
+    #when: ansible_os_family=="Debian"
+    
+    

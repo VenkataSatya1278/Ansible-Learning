@@ -1,0 +1,17 @@
+---
+- include: Update&Upgrade_SoftwarePackages.yml
+- hosts: webservers
+  
+  vars_files:
+    - 'vars.yml'
+
+  tasks:
+  - name: SYSTEM | Install the basic web package
+    apt: pkg={{ item }} state=present
+    with_items:
+    - nginx
+  
+  - name: Start NGINX service
+    service: name={{ item }} state=started
+    with_items:
+    - nginx

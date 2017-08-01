@@ -1,8 +1,8 @@
 [allservers]
 webserver ansible_ssh_host=10.0.3.167
 dbserver ansible_ssh_host=10.0.3.202
-webserver1 ansible_ssh_host=10.0.3.167
-dbserver1 ansible_ssh_host=10.0.3.202
+webserver1 ansible_ssh_host=10.0.3.154
+dbserver1 ansible_ssh_host=10.0.3.67
 
 [webservers]
 webserver
@@ -19,3 +19,4 @@ dbservers
 [datacenter:vars]
 ansible_ssh_user=root
 ansible_ssh_pass={{password}}
+

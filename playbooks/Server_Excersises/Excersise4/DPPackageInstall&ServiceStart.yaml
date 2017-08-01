@@ -1,0 +1,17 @@
+---
+- include: Update&Upgrade_SoftwarePackages.yml
+- hosts: dbservers
+  
+  vars_files:
+    - 'vars.yml'
+
+   tasks:
+  - name: SYSTEM | Install the basic db package
+    apt: pkg={{ item }} state=present
+    with_items:
+    - mssql
+  
+  - name: Start DB service
+    service: name={{ item }} state=started
+    with_items:
+    - mssql

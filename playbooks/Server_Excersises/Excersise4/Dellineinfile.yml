@@ -1,0 +1,13 @@
+---
+- hosts: allservers
+
+  vars_files:
+    - 'vars.yml'
+
+  tasks:
+    - name: Del line to end of the file
+      lineinfile: 
+        dest: /etc/sudoers 
+        regexp: "^ubuntu"
+        state: absent
+        
