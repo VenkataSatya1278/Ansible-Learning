@@ -1,10 +1,21 @@
 ---
 - hosts: allservers
+  become: yes
 
   vars_files:
     - 'vars.yml'
 
   tasks:
+
+    - name: check the line existence in file
+      command: awk /^ubuntu/ /etc/sudoers 
+      #shell: cat /etc/sudoers | egrep ubuntu
+      register: check_line
+      ignore_errors: True
+      changed_when: false
+    - debug: msg="{{check_line.stdout}}"
+
+
     - name: Add line to end of the file
       lineinfile: 
         dest: /etc/sudoers 
@@ -12,3 +23,4 @@
         state: present
         insertafter: EOF
         create: True
+      when: check_line.stdout == ""
